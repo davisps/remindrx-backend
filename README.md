@@ -21,7 +21,7 @@ or
 
 ## Notes
 
-- This is a **local-only prototype** (no backend). Passwords are stored as **salted SHA-256 hashes**.
+- This is a **local-only prototype**, set up with a local backend so wont run without a local server set up on your computer. Passwords are stored as **salted SHA-256 hashes**.
 - Medication + adherence data is stored in a local Room database (`remindrx.db`).
 - Reminders are **one daily time per medication** (`HH:mm`) in this first UI pass.
 
