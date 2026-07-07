@@ -1,4 +1,6 @@
 # RemindRx (prototype)
+## Contributor Note
+Originally built as a team capstone project. In this repo, I primarily worked on the backend architecture and RBAC using Ktor. This is located in the backend folder. Team members' commit history has been removed for privacy.
 
 This repo contains a starter Android app implementing the **core RemindRx requirements** from the project proposal + SRS:
 
