@@ -1,0 +1,29 @@
+allprojects {
+    tasks.register("fixRes") {
+        doLast {
+            def resDir = file("app/src/main/res/drawable")
+            def oldFile = new File(resDir, "LOGO.png")
+            def tempFile = new File(resDir, "temp_logo.png")
+            def newFile = new File(resDir, "logo.png")
+            
+            if (oldFile.exists()) {
+                println "Found LOGO.png. Attempting rename via temp file."
+                if (oldFile.renameTo(tempFile)) {
+                    println "Renamed to temp_logo.png"
+                    if (tempFile.renameTo(newFile)) {
+                        println "Renamed to logo.png successfully"
+                    } else {
+                        println "Failed to rename temp_logo.png to logo.png"
+                    }
+                } else {
+                    println "Failed to rename LOGO.png to temp_logo.png"
+                }
+            } else if (newFile.exists()) {
+                println "logo.png already exists."
+            } else {
+                println "Neither LOGO.png nor logo.png found in ${resDir.absolutePath}"
+                resDir.listFiles()?.each { println "Found: ${it.name}" }
+            }
+        }
+    }
+}

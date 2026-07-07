@@ -1,0 +1,51 @@
+@startuml
+title RemindRx — Use Case Diagram
+left to right direction
+
+actor User as user
+actor "Caregiver\n(stretch)" as caregiver
+actor "System Timer" as timer <<system>>
+
+rectangle "RemindRx System" {
+  usecase "Register Account" as UC_Register
+  usecase "Log In" as UC_Login
+  usecase "Add Medication" as UC_AddMed
+  usecase "Edit Medication" as UC_EditMed
+  usecase "Delete Medication" as UC_DeleteMed
+  usecase "Receive Reminder" as UC_ReceiveReminder
+  usecase "Confirm Dose Taken" as UC_ConfirmDose
+  usecase "View Adherence History" as UC_ViewHistory
+  usecase "Track Refill" as UC_TrackRefill
+  usecase "Receive Refill Alert" as UC_ReceiveRefillAlert
+  usecase "Log Out" as UC_Logout
+
+  ' Optional advanced structure
+  usecase "Update Remaining Doses" as UC_UpdateRemaining
+  usecase "Check Refill Threshold" as UC_CheckThreshold
+}
+
+' User interactions
+user -- UC_Register
+user -- UC_Login
+user -- UC_AddMed
+user -- UC_EditMed
+user -- UC_DeleteMed
+user -- UC_ConfirmDose
+user -- UC_ViewHistory
+user -- UC_TrackRefill
+user -- UC_Logout
+
+' System-triggered events
+timer -- UC_ReceiveReminder
+timer -- UC_ReceiveRefillAlert
+
+' Optional caregiver (stretch goal)
+caregiver -- UC_ViewHistory
+caregiver -- UC_ReceiveReminder
+caregiver -- UC_ReceiveRefillAlert
+
+' Includes (optional, advanced)
+UC_ConfirmDose ..> UC_UpdateRemaining : <<include>>
+UC_UpdateRemaining ..> UC_CheckThreshold : <<include>>
+
+@enduml

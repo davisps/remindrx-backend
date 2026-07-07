@@ -1,0 +1,68 @@
+@startuml
+title RemindRx — Core System Class Diagram
+
+skinparam classAttributeIconSize 0
+
+class User {
+  - userID: String
+  - email: String
+  - passwordHash: String
+  - name: String
+  --
+  + register()
+  + login()
+  + logout()
+  + updateProfile()
+}
+
+class Medication {
+  - medicationID: String
+  - name: String
+  - dosage: String
+  - schedule: String
+  - specialInstructions: String
+  - remainingDoses: int
+  - refillThreshold: int
+  --
+  + addMedication()
+  + editMedication()
+  + deleteMedication()
+  + updateRemainingDoses()
+}
+
+class Reminder {
+  - reminderID: String
+  - scheduledTime: DateTime
+  - repeatPattern: String
+  - isActive: Boolean
+  --
+  + scheduleReminder()
+  + cancelReminder()
+  + triggerNotification()
+}
+
+class AdherenceLog {
+  - logID: String
+  - timestamp: DateTime
+  - status: String
+  --
+  + logDose()
+  + viewHistory()
+}
+
+class RefillTracker {
+  - trackerID: String
+  - refillDate: Date
+  - alertSent: Boolean
+  --
+  + calculateRefillDate()
+  + sendRefillAlert()
+}
+
+' Relationships (associations) with multiplicity
+User "1" -- "0..*" Medication : has >
+Medication "1" -- "0..*" Reminder : schedules >
+Medication "1" -- "0..*" AdherenceLog : logs >
+Medication "1" -- "1" RefillTracker : tracks >
+
+@enduml
